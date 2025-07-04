@@ -1,0 +1,5 @@
+---
+# tasks file for hostname
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: bash-days-srvx
