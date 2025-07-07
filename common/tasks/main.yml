@@ -1,10 +1,12 @@
 ---
 # tasks file for common
 
+# set timezone UTC+3/Moscow
 - name: set timezone to Europe/Moscow
   community.general.timezone:
-    name: Europe/Moscow
+    name: {{ timezone }}
 
+# mount and set swapfile to server
 - block:
   - name: create a swap file
     shell: fallocate -l {{ swap_size }} /swapfile
@@ -35,3 +37,8 @@
       passno: 0
       dump: 0
       state: present
+
+# set hostname to server
+- name: set hostname
+  ansible.builtin.hostname:
+    name: {{ hostname }}

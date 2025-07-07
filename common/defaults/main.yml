@@ -1,2 +1,6 @@
 ---
 swap_size: 1G
+region: 'Europe'
+city: 'Moscow'
+timezone: '{{ region }}/{{ city }}'
+hostname: vinni-lf-project
