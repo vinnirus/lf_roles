@@ -4,7 +4,7 @@
 # set timezone UTC+3/Moscow
 - name: set timezone to Europe/Moscow
   community.general.timezone:
-    name: {{ timezone }}
+    name: "{{ timezone }}"
 
 # mount and set swapfile to server
 - block:
@@ -41,4 +41,4 @@
 # set hostname to server
 - name: set hostname
   ansible.builtin.hostname:
-    name: {{ hostname }}
+    name: "{{ hostname }}"
