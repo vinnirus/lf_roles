@@ -9,29 +9,29 @@
 # mount and set swapfile to server
 - block:
   - name: create a swap file
-    shell: fallocate -l {{ swap_size }} /swapfile
+    shell: fallocate -l {{ swap_size }} "{{ swap_path }}"
     args:
-      creates: /swapfile
+      creates: "{{ swap_path }}"
     
   - name: set correct permissions
     file:
-      path: /swapfile
+      path: "{{ swap_path }}"
       owner: root
       group: root
       mode: '0600'
 
   - name: make the swapfile
-    shell: mkswap /swapfile
+    shell: mkswap "{{ swap_path }}"
     when: ansible_facts.swapfree_mb == 0
 
   - name: enable the swap file
-    shell: swapon /swapfile
+    shell: swapon "{{ swap_path }}"
     when: ansible_facts.swapfree_mb == 0
 
   - name: add swap file to fstab
     mount:
       name: none
-      src: /swapfile
+      src: "{{ swap_path }}"
       fstype: swap
       opts: sw
       passno: 0

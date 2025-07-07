@@ -1,0 +1,39 @@
+---
+- name: Print all available facts
+  ansible.builtin.debug:
+    var: ansible_facts
+
+- name: Gather data from remote host for swapfile existing
+  ansible.builtin.shell:
+    cmd: cat /etc/fstab > /tmp/gather_swap_fstab.txt
+
+- name: Check swap info into tmp files
+  ansible.builtin.lineinline:
+    path: /tmp/gather_swap_fstab.txt
+    line: "swap"
+    state: present
+  check_mode: yes
+  register: line_check
+  changed_when: false
+
+- name: Deactivate swap file on remote host
+  ansible.builtin.shell:
+    cmd: swapoff -a
+  debug:
+    msg: "Finded swap string into fstab file, deativate swap on server"
+  when: line_check.changed == false
+
+- name: Remove Swap from fstab
+  ansible.builtin.mount:
+    name: swap
+    fstype: swap
+    state: absent
+  debug:
+    msg: "Delete swap record from fstab"
+
+- name: Delete swap file
+  ansible.builtin.shell:
+    cmd: rm {{ swap_path }}
+  debug:
+    msg: "Delete swap file"
+

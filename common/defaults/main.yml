@@ -1,6 +1,7 @@
 ---
 swap_size: 1G
-region: 'Europe'
-city: 'Moscow'
+swap_path: "/swapfile"
+region: "Europe"
+city: "Moscow"
 timezone: '{{ region }}/{{ city }}'
-hostname: vinni-lf-project
+hostname: "vinni-lf-project"
