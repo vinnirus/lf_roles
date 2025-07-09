@@ -1,0 +1,7 @@
+---
+- name: Create user on server
+  ansible.builtin.user:
+    name: "{{ set_user_name }}"
+    shell: "{{ set_user_shell }}"
+    state: "{{ set_user_state }}"
+
