@@ -8,7 +8,7 @@
   register: line_check
   changed_when: false
 
-- name: deactivate swap file on remote host
+- name: Deactivate swap file on remote host
   ansible.builtin.shell:
     cmd: swapoff -a
   when: line_check.changed == false

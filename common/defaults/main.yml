@@ -4,4 +4,3 @@ swap_path: "/swapfile"
 region: "Europe"
 city: "Moscow"
 timezone: '{{ region }}/{{ city }}'
-hostname: "vinni-lf-project"

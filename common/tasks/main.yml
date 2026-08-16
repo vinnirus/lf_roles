@@ -41,4 +41,4 @@
 # set hostname to server
 - name: set hostname
   ansible.builtin.hostname:
-    name: "{{ hostname }}"
+    name: "{{ ansible_hostname }}"
